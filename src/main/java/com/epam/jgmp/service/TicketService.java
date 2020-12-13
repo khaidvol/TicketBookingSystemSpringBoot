@@ -144,8 +144,9 @@ public class TicketService {
     }
   }
 
-  public void preloadTicketsFromFile(FileInputStream fileInputStream) {
+  public List<Ticket> preloadTicketsFromFile(FileInputStream fileInputStream) {
 
+    List<Ticket> freshTickets = new ArrayList<>();
     try {
       // parse tickets from xml file
       List<XMLTicket> tickets = objXMLMapper.xmlToObjFromFile(fileInputStream);
@@ -153,14 +154,15 @@ public class TicketService {
       // book each XMLTicket (id is assigned and ticket is stored to the storage)
       tickets.forEach(
           ticket ->
-              bookTicket(
+              freshTickets.add(bookTicket(
                   ticket.getUserId(),
                   ticket.getEventId(),
                   ticket.getPlace(),
-                  ticket.getCategory()));
+                  ticket.getCategory())));
 
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return freshTickets;
   }
 }

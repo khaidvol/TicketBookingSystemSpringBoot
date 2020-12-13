@@ -1,6 +1,7 @@
 package com.epam.jgmp.controller;
 
 import com.epam.jgmp.facade.BookingFacade;
+import com.epam.jgmp.model.Ticket;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/file")
@@ -31,9 +33,9 @@ public class FileUploadController {
       throws IOException {
 
     FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
-    bookingFacade.preloadTicketsFromFile(fileInputStream);
-
+    List<Ticket> tickets = bookingFacade.preloadTicketsFromFile(fileInputStream);
     modelMap.addAttribute("file", file);
+    modelMap.addAttribute("tickets", tickets);
     return "fileUploadView";
   }
 

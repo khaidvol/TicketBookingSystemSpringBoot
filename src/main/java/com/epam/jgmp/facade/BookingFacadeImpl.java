@@ -114,7 +114,7 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public void preloadTicketsFromFile(FileInputStream fileInputStream) {
-    ticketService.preloadTicketsFromFile(fileInputStream);
+  public List<Ticket> preloadTicketsFromFile(FileInputStream fileInputStream) {
+    return ticketService.preloadTicketsFromFile(fileInputStream);
   }
 }

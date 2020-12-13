@@ -158,5 +158,5 @@ public interface BookingFacade {
   public void preloadTickets();
 
   /** Preload tickets from xml file. */
-  public void preloadTicketsFromFile(FileInputStream fileInputStream);
+  public List<Ticket> preloadTicketsFromFile(FileInputStream fileInputStream);
 }
